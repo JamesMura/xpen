@@ -1,0 +1,129 @@
+<head>
+	<title>xpen</title>
+</head>
+
+<body>
+	
+	
+	<div id="wrap">
+
+		<!-- Fixed navbar -->
+		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Xpen</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Begin page content -->
+		<div class="container">
+			<div class="page-header">
+				<h3>Expenses</h3>
+			</div>
+			<div>
+				{{> totals}}
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					{{> expenses}}
+				</div>
+				<div class="col-md-6">
+					{{> new_expense}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					{{> selected_expense}}
+				</div>
+			</div>
+			
+			 
+		</div>
+
+		<div id="footer">
+			<div class="container">
+			
+			</div>
+		</div>
+	</body>
+
+	<template name="expenses">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Description</th>
+					<th>Amount</th>
+					<th>Category</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each expenses}}
+				{{> expense}}
+				{{/each}}
+			</tbody>
+			
+		</table>
+	
+	</template>
+	<template name="expense">
+		<tr id="{{_id}}">
+			<td>{{_id}}</td>
+			<td>{{description}}</td>
+			<td>{{amount}}</td>
+			<td>{{category}}</td>
+			
+		</tr>
+		
+	</template>
+	
+	<template name="selected_expense">
+		 {{#if expense}}
+		<table class="table">
+			<tr id="{{expense._id}}">
+				<td>{{expense._id}}</td>
+				<td>{{expense.description}}</td>
+				<td>{{expense.amount}}</td>
+				<td>{{expense.category}}</td>
+				<td>
+					<button id="delete" data-id="{{expense._id}}" class="btn">Delete</button>
+				</td>
+			</tr>
+			
+		</table>
+		  {{/if}}
+	
+	</template>
+	
+	<template name="totals">
+		<p>
+			Total Expenses	{{total}}
+		</p>
+	</template>
+
+	<template name="new_expense">
+		<form action="" method="get" accept-charset="utf-8" role="form">
+			<div class="form-group">
+				<label for="description">Description</label>
+				<input type="text" class="form-control" name="description" value="" id="description">
+			</div>
+			<div class="form-group">
+				<label for="amount">Amount</label>
+				<input type="text"  class="form-control" name="amount" value="" id="amount">
+			</div>
+			<div class="form-group">
+				<label for="category">Category</label>
+				<input type="text" class="form-control" name="category" value="" id="category">
+			</div>
+		
+			<p><input type="submit" value="Add" class="btn"></p>
+		</form>
+	
+	</template>
